@@ -1,6 +1,6 @@
 # Movie Search Website
 
-Practice app from the scrimba course: https://scrimba.com/playlist/pk53Wh4
+Builds on the exercise from the scrimba course: https://scrimba.com/playlist/pk53Wh4
 Using movie API https://developers.themoviedb.org/3/getting-started/introduction
 
 # Getting Started with Create React App
