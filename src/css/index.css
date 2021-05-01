@@ -32,7 +32,7 @@ small {
     text-align: center;
 }
 
-.form {
+.search-bar {
     display: grid;
 }
 
@@ -68,8 +68,9 @@ small {
 }
 
 @media (min-width:786px){
-    .form {
-        grid-template-columns: 1fr auto auto;
+    .search-bar {
+        width: 100%;
+        grid-template-columns: 1fr auto;
         grid-gap: 1rem;
         align-items: center;
     }
@@ -96,4 +97,8 @@ small {
     .card-list {
         grid-template-columns: 1fr;
     }
+}
+
+.MuiButtonBase-root, .MuiAccordionSummary-root {
+    display: none;
 }
