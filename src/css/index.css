@@ -69,7 +69,7 @@ small {
 
 @media (min-width:786px){
     .form {
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr auto auto;
         grid-gap: 1rem;
         align-items: center;
     }
