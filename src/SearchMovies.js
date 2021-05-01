@@ -44,7 +44,7 @@ export default function SearchMovies() {
         try {
             const result = await fetch(url)
             const data = await result.json()
-            setMovies(data.results)
+            setMovies(data.results, [movies])
         }
         catch(err) {
             console.log(err)
@@ -59,20 +59,40 @@ export default function SearchMovies() {
     };
   
     // Sort by Ratings
-    const [ratingDesc, setRatingDesc] = React.useState(true);
+    const [sortBy, setSortBy] = useState("sortRatings")
+    const [ratingDesc, setRatingDesc] = useState(true);
     const sortRatings = (event) => {
         event.preventDefault()
         setRatingDesc(prevRatingDesc => !prevRatingDesc, [ratingDesc])
+        setSortBy("sortRatings", [ratingDesc]);
+    }
+
+    // Sort by Release Date
+    const [releaseDateDesc, setReleaseDateDesc] = useState(true);
+    const sortReleaseDate = (event) => {
+        event.preventDefault()
+        setReleaseDateDesc(prevReleaseDateDesc => !prevReleaseDateDesc, [releaseDateDesc])
+        setSortBy("sortReleaseDate", [releaseDateDesc]);
     }
 
     // display results
     const displayResults = () => {
-        const sortFactor = ratingDesc ? -1 : 1;
+        const sortByRatings = (movie_a, movie_b) => {
+            const sortFactor = ratingDesc ? -1 : 1;
+            return (movie_a.vote_average -  movie_b.vote_average) * sortFactor
+        }
+        
+        const sortByReleaseDate = (movie_a, movie_b) => {
+            const sortFactor = releaseDateDesc ? -1 : 1;
+            return (new Date(movie_a.release_date) - new Date(movie_b.release_date)) * sortFactor
+        }
+
         return movies
             .filter(movie => movie.poster_path)
-            .sort((movie_a, movie_b) => (movie_a.vote_average -  movie_b.vote_average) * sortFactor)
+            .sort((a, b) => {
+                return sortBy === "sortRatings" ? sortByRatings(a, b) : sortByReleaseDate(a, b)
+            })
             .map(movie => {
-                console.log(movie.vote_average)
                 return <MovieCard key={movie.id} movie={movie}/>
             })
     }
@@ -95,13 +115,21 @@ export default function SearchMovies() {
                         <Collapse in={open} timeout="auto" unmountOnExit>
                             <div className="filter-settings">
                             <button
+                                name="sortRatings"
                                 className="button"
                                 onClick={sortRatings}
                             >
-                            <span>Ratings  </span>
-                            {ratingDesc ? <ArrowDownward /> : <ArrowUpward />}
+                                <span>Ratings  </span>
+                                {ratingDesc ? <ArrowDownward /> : <ArrowUpward />}
                             </button>
-                            <button className="button">Release Date</button>
+                            <button
+                                name="sortReleaseDate"
+                                className="button"
+                                onClick={sortReleaseDate}
+                            >
+                                <span>Release Date  </span>
+                                {releaseDateDesc ? <ArrowDownward /> : <ArrowUpward />}
+                            </button>
                             </div>
                         </Collapse>
                 </div>
