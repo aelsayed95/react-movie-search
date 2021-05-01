@@ -25,7 +25,6 @@ export default function SearchMovies() {
     return (
         <>
             <form className="form" onSubmit={handleSubmit}>
-                <label htmlFor="query" className="label">Movie Name</label>
                 <input
                     className="input"
                     type="text"
