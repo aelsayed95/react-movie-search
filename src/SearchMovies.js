@@ -15,20 +15,16 @@ const FilterButton = withStyles({
       boxShadow: 'none',
       color: "white",
       backgroundColor: 'rgba(0,0,0,0.75)',
-      borderColor: 'rgba(0,0,0,0.75)',
       '&:hover': {
         backgroundColor: 'rgba(0,0,0,0.85)',
-        borderColor: 'rgba(0,0,0,0.85)',
         boxShadow: 'none',
       },
       '&:active': {
         boxShadow: 'none',
         backgroundColor: 'rgba(0,0,0,0.65)',
-        borderColor: 'rgba(0,0,0,0.75)',
       },
       '&:focus': {
           backgroundColor: 'rgba(0,0,0,0.85)',
-          borderColor: 'rgba(0,0,0,0.85)',
           boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
       }
     },
@@ -108,28 +104,30 @@ export default function SearchMovies() {
                             placeholder="What do you want to watch?"
                             onChange={(e) => setQuery(e.target.value)}
                         />
-                        <button className="button" type="submit" disabled={!query}>Search</button>
-                        <FilterButton onClick={handleFilterClick}>
-                            <FilterList />
-                        </FilterButton>
+                        <div className="search-bar--buttons">
+                            <button className="button" type="submit" disabled={!query}>Search</button>
+                            <FilterButton onClick={handleFilterClick}>
+                                <FilterList />
+                            </FilterButton>
+                        </div>
                         <Collapse in={open} timeout="auto" unmountOnExit>
                             <div className="filter-settings">
-                            <button
-                                name="sortRatings"
-                                className="button"
-                                onClick={sortRatings}
-                            >
-                                <span>Ratings  </span>
-                                {ratingDesc ? <ArrowDownward /> : <ArrowUpward />}
-                            </button>
-                            <button
-                                name="sortReleaseDate"
-                                className="button"
-                                onClick={sortReleaseDate}
-                            >
-                                <span>Release Date  </span>
-                                {releaseDateDesc ? <ArrowDownward /> : <ArrowUpward />}
-                            </button>
+                                <button
+                                    name="sortRatings"
+                                    className="button"
+                                    onClick={sortRatings}
+                                >
+                                    <span>Ratings  </span>
+                                    {ratingDesc ? <ArrowDownward /> : <ArrowUpward />}
+                                </button>
+                                <button
+                                    name="sortReleaseDate"
+                                    className="button"
+                                    onClick={sortReleaseDate}
+                                >
+                                    <span>Release Date  </span>
+                                    {releaseDateDesc ? <ArrowDownward /> : <ArrowUpward />}
+                                </button>
                             </div>
                         </Collapse>
                 </div>
