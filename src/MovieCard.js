@@ -1,6 +1,7 @@
 import React from "react"
 
 import './css/MovieCard.css';
+import ExpandableDescr from "./ExpandableDescr";
 
 
 export default function MovieCard({movie}) {
@@ -17,7 +18,7 @@ export default function MovieCard({movie}) {
                     <small>RELEASE DATE: {movie.release_date}</small>
                     <small className="ratings">RATING: {movie.vote_average}</small>
                 </p>
-                <p className="card--desc">{movie.overview}</p>
+                <ExpandableDescr overview={movie.overview}/>
             </div>
         </div>
     )
